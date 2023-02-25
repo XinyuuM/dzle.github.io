@@ -6,16 +6,17 @@
   
   <title>PHP+MYSQL实现翻页功能 | Xinyuu的自由天空</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="构建SQL语句分页其实利用的是MySQL中limit关键字来实现的，例如我们查询一个表中的前五条数据： SELECT * FROM acgtime.bangumi WHERE title LIKE &#39;%$word%&#39; AND status LIKE &#39;%$week%&#39; LIMIT 0,4; limit后需要两个参数，第一个参数代表从第几条开始取；第二个参数代表一次取">
+  <meta name="description" content="后台实现构建SQL语句分页其实利用的是MySQL中limit关键字来实现的，例如我们查询一个表中的前五条数据： SELECT * FROM acgtime.bangumi WHERE title LIKE &#39;%$word%&#39; AND status LIKE &#39;%$week%&#39; LIMIT 0,4; limit后需要两个参数，第一个参数代表从第几条开始取；第二个参数代">
 <meta property="og:type" content="article">
 <meta property="og:title" content="PHP+MYSQL实现翻页功能">
 <meta property="og:url" content="https://xinyuu.socomic.net/2023/02/25/PHP-MYSQL%E5%AE%9E%E7%8E%B0%E7%BF%BB%E9%A1%B5%E5%8A%9F%E8%83%BD/index.html">
 <meta property="og:site_name" content="Xinyuu的自由天空">
-<meta property="og:description" content="构建SQL语句分页其实利用的是MySQL中limit关键字来实现的，例如我们查询一个表中的前五条数据： SELECT * FROM acgtime.bangumi WHERE title LIKE &#39;%$word%&#39; AND status LIKE &#39;%$week%&#39; LIMIT 0,4; limit后需要两个参数，第一个参数代表从第几条开始取；第二个参数代表一次取">
+<meta property="og:description" content="后台实现构建SQL语句分页其实利用的是MySQL中limit关键字来实现的，例如我们查询一个表中的前五条数据： SELECT * FROM acgtime.bangumi WHERE title LIKE &#39;%$word%&#39; AND status LIKE &#39;%$week%&#39; LIMIT 0,4; limit后需要两个参数，第一个参数代表从第几条开始取；第二个参数代">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-02-25T12:16:37.000Z">
-<meta property="article:modified_time" content="2023-02-25T12:47:18.067Z">
+<meta property="article:modified_time" content="2023-02-25T12:53:39.263Z">
 <meta property="article:author" content="Xinyuu">
+<meta property="article:tag" content="PHP">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="Xinyuu的自由天空" type="application/atom+xml">
@@ -67,10 +68,10 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://xinyuu.socomic.net"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Suche"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://xinyuu.socomic.net"></form>
       </div>
     </div>
   </div>
@@ -99,11 +100,11 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h5 id="构建SQL语句"><a href="#构建SQL语句" class="headerlink" title="构建SQL语句"></a>构建SQL语句</h5><p>分页其实利用的是<code>MySQL</code>中<code>limit</code>关键字来实现的，例如我们查询一个表中的前五条数据：</p>
+        <h4 id="后台实现"><a href="#后台实现" class="headerlink" title="后台实现"></a>后台实现</h4><h5 id="构建SQL语句"><a href="#构建SQL语句" class="headerlink" title="构建SQL语句"></a>构建SQL语句</h5><p>分页其实利用的是<code>MySQL</code>中<code>limit</code>关键字来实现的，例如我们查询一个表中的前五条数据：</p>
 <p><code>SELECT * FROM acgtime.bangumi WHERE title LIKE &#39;%$word%&#39; AND status LIKE &#39;%$week%&#39; LIMIT 0,4;</code></p>
 <p>limit后需要两个参数，第一个参数代表从第几条开始取；第二个参数代表一次取几条。<br>那么上述SQL语句表达的意思为从第 0 条开始取，取 5条（实则 0 为第 1 条，计数从 0 开始）。</p>
 <p>我们把取到的前两条数据作为第一页。</p>
-<p>那么继续取第二页，还是 5 条数据，则SQL语句为：<br><code>SELECT * FROM acgtime.bangumi WHERE title LIKE &#39;%$word%&#39; AND status LIKE &#39;%$week%&#39; LIMIT 4,4;</code></p>
+<p>那么继续取第二页，还是 4 条数据，则SQL语句为：<br><code>SELECT * FROM acgtime.bangumi WHERE title LIKE &#39;%$word%&#39; AND status LIKE &#39;%$week%&#39; LIMIT 4,4;</code></p>
 <h5 id="第三页："><a href="#第三页：" class="headerlink" title="第三页："></a>第三页：</h5><p><code>SELECT * FROM acgtime.bangumi WHERE title LIKE &#39;%$word%&#39; AND status LIKE &#39;%$week%&#39; LIMIT 9,4;</code></p>
 <h5 id="定义每页显示的条数"><a href="#定义每页显示的条数" class="headerlink" title="定义每页显示的条数"></a>定义每页显示的条数</h5><p><code>$pageSize = 4;</code></p>
 <h5 id="定义当前页"><a href="#定义当前页" class="headerlink" title="定义当前页"></a>定义当前页</h5><p><code>$page = 1;</code></p>
@@ -113,7 +114,7 @@
 <p>这时改变<code>$page</code>的值，就可以查询对应页的数据。</p>
 <h5 id="通过地址栏传参得到-page参数来定义当前页"><a href="#通过地址栏传参得到-page参数来定义当前页" class="headerlink" title="通过地址栏传参得到$page参数来定义当前页"></a>通过地址栏传参得到<code>$page</code>参数来定义当前页</h5><p>为了更加的灵活我们通过地址栏传参得到想要显示的页数，所以第四步的代码改为：</p>
 <p><code>if ($_GET[&#39;page&#39;]) &#123;     $page = $_GET[&#39;page&#39;];</code><br><code>&#125; else &#123;</code><br>    <code>$page = 1; // 接收不到按照 1 处理，即默认第 1 页</code><br><code>&#125;</code></p>
-<h4 id="前端切换页面设置"><a href="#前端切换页面设置" class="headerlink" title="前端切换页面设置"></a>前端切换页面设置</h4><p>当点击<code>上一页</code>，我们需要给当前页<code>$page - 1</code>；<br>当点击<code>下一页</code>，我们需要给当前页<code>$page + 1</code>；</p>
+<h4 id="前端实现"><a href="#前端实现" class="headerlink" title="前端实现"></a>前端实现</h4><p>当点击<code>上一页</code>，我们需要给当前页<code>$page - 1</code>；<br>当点击<code>下一页</code>，我们需要给当前页<code>$page + 1</code>；</p>
 <p>在当前页的基础上确定上一页：</p>
 <p><code>$up = $page - 1;</code></p>
 <p>在当前页的基础上确定下一页：</p>
@@ -135,10 +136,12 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xinyuu.socomic.net/2023/02/25/PHP-MYSQL%E5%AE%9E%E7%8E%B0%E7%BF%BB%E9%A1%B5%E5%8A%9F%E8%83%BD/" data-id="clejyj418000270sxgbqo65mj" data-title="PHP+MYSQL实现翻页功能" class="article-share-link">Share</a>
+      <a data-url="https://xinyuu.socomic.net/2023/02/25/PHP-MYSQL%E5%AE%9E%E7%8E%B0%E7%BF%BB%E9%A1%B5%E5%8A%9F%E8%83%BD/" data-id="clejyr42z0001ywsxdx1mfrof" data-title="PHP+MYSQL实现翻页功能" class="article-share-link">Teilen</a>
       
       
       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/" rel="tag">PHP</a></li></ul>
+
     </footer>
   </div>
   
@@ -147,7 +150,7 @@
   
   
     <a href="/2023/02/22/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
+      <strong class="article-nav-caption">Älter</strong>
       <div class="article-nav-title">Hello World</div>
     </a>
   
@@ -165,13 +168,27 @@
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/" rel="tag">PHP</a></li></ul>
+    </div>
+  </div>
+
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/PHP/" style="font-size: 10px;">PHP</a>
+    </div>
+  </div>
+
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">Archiv</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">二月 2023</a></li></ul>
     </div>
@@ -181,7 +198,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">letzter Beitrag</h3>
     <div class="widget">
       <ul>
         
