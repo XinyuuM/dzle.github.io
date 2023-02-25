@@ -6,15 +6,15 @@
   
   <title>PHP+MYSQL实现翻页功能 | Xinyuu的自由天空</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="为什么要做分页功能添加分页功能可以让在个别网络环境较差的情况下可以大幅缩短浏览器对资源的响应时间，且分页后网页更加美观规整。 后台实现构建SQL语句分页其实利用的是MySQL中limit关键字来实现的，例如我们查询一个表中的前四条数据： SELECT * FROM acgtime.bangumi WHERE title LIKE &#39;%$word%&#39; AND status LIKE">
+  <meta name="description" content="为什么要做分页功能添加分页功能可以让在个别网络环境较差的情况下大幅缩短浏览器对资源的响应时间，且分页后网页更加美观规整。 后台实现构建SQL语句分页其实利用的是MySQL中limit关键字来实现的，例如我们查询一个表中的前四条数据： SELECT * FROM acgtime.bangumi WHERE title LIKE &#39;%$word%&#39; AND status LIKE &amp;#">
 <meta property="og:type" content="article">
 <meta property="og:title" content="PHP+MYSQL实现翻页功能">
 <meta property="og:url" content="https://xinyuu.socomic.net/2023/02/25/PHP-MYSQL%E5%AE%9E%E7%8E%B0%E7%BF%BB%E9%A1%B5%E5%8A%9F%E8%83%BD/index.html">
 <meta property="og:site_name" content="Xinyuu的自由天空">
-<meta property="og:description" content="为什么要做分页功能添加分页功能可以让在个别网络环境较差的情况下可以大幅缩短浏览器对资源的响应时间，且分页后网页更加美观规整。 后台实现构建SQL语句分页其实利用的是MySQL中limit关键字来实现的，例如我们查询一个表中的前四条数据： SELECT * FROM acgtime.bangumi WHERE title LIKE &#39;%$word%&#39; AND status LIKE">
+<meta property="og:description" content="为什么要做分页功能添加分页功能可以让在个别网络环境较差的情况下大幅缩短浏览器对资源的响应时间，且分页后网页更加美观规整。 后台实现构建SQL语句分页其实利用的是MySQL中limit关键字来实现的，例如我们查询一个表中的前四条数据： SELECT * FROM acgtime.bangumi WHERE title LIKE &#39;%$word%&#39; AND status LIKE &amp;#">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-02-25T12:16:37.000Z">
-<meta property="article:modified_time" content="2023-02-25T13:53:03.072Z">
+<meta property="article:modified_time" content="2023-02-25T13:53:53.463Z">
 <meta property="article:author" content="Xinyuu">
 <meta property="article:tag" content="PHP">
 <meta name="twitter:card" content="summary">
@@ -100,7 +100,7 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h4 id="为什么要做分页功能"><a href="#为什么要做分页功能" class="headerlink" title="为什么要做分页功能"></a>为什么要做分页功能</h4><p>添加分页功能可以让在个别网络环境较差的情况下可以大幅缩短浏览器对资源的响应时间，且分页后网页更加美观规整。</p>
+        <h4 id="为什么要做分页功能"><a href="#为什么要做分页功能" class="headerlink" title="为什么要做分页功能"></a>为什么要做分页功能</h4><p>添加分页功能可以让在个别网络环境较差的情况下大幅缩短浏览器对资源的响应时间，且分页后网页更加美观规整。</p>
 <h4 id="后台实现"><a href="#后台实现" class="headerlink" title="后台实现"></a>后台实现</h4><h5 id="构建SQL语句"><a href="#构建SQL语句" class="headerlink" title="构建SQL语句"></a>构建SQL语句</h5><p>分页其实利用的是<code>MySQL</code>中<code>limit</code>关键字来实现的，例如我们查询一个表中的前四条数据：</p>
 <p><code>SELECT * FROM acgtime.bangumi WHERE title LIKE &#39;%$word%&#39; AND status LIKE &#39;%$week%&#39; LIMIT 0,4;</code></p>
 <p>limit后需要两个参数，第一个参数代表从第几条开始取；第二个参数代表一次取几条。<br>那么上述SQL语句表达的意思为从第 0 条开始取，取 4条（实则 0 为第 1 条，计数从 0 开始）。</p>
@@ -137,7 +137,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xinyuu.socomic.net/2023/02/25/PHP-MYSQL%E5%AE%9E%E7%8E%B0%E7%BF%BB%E9%A1%B5%E5%8A%9F%E8%83%BD/" data-id="clek0vmjm000118sxge3d09di" data-title="PHP+MYSQL实现翻页功能" class="article-share-link">Teilen</a>
+      <a data-url="https://xinyuu.socomic.net/2023/02/25/PHP-MYSQL%E5%AE%9E%E7%8E%B0%E7%BF%BB%E9%A1%B5%E5%8A%9F%E8%83%BD/" data-id="clek0wnct0001bssx97xjb3b0" data-title="PHP+MYSQL实现翻页功能" class="article-share-link">Teilen</a>
       
       
       
