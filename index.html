@@ -97,9 +97,9 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h4 id="后台实现"><a href="#后台实现" class="headerlink" title="后台实现"></a>后台实现</h4><h5 id="构建SQL语句"><a href="#构建SQL语句" class="headerlink" title="构建SQL语句"></a>构建SQL语句</h5><p>分页其实利用的是<code>MySQL</code>中<code>limit</code>关键字来实现的，例如我们查询一个表中的前五条数据：</p>
+        <h4 id="后台实现"><a href="#后台实现" class="headerlink" title="后台实现"></a>后台实现</h4><h5 id="构建SQL语句"><a href="#构建SQL语句" class="headerlink" title="构建SQL语句"></a>构建SQL语句</h5><p>分页其实利用的是<code>MySQL</code>中<code>limit</code>关键字来实现的，例如我们查询一个表中的前四条数据：</p>
 <p><code>SELECT * FROM acgtime.bangumi WHERE title LIKE &#39;%$word%&#39; AND status LIKE &#39;%$week%&#39; LIMIT 0,4;</code></p>
-<p>limit后需要两个参数，第一个参数代表从第几条开始取；第二个参数代表一次取几条。<br>那么上述SQL语句表达的意思为从第 0 条开始取，取 5条（实则 0 为第 1 条，计数从 0 开始）。</p>
+<p>limit后需要两个参数，第一个参数代表从第几条开始取；第二个参数代表一次取几条。<br>那么上述SQL语句表达的意思为从第 0 条开始取，取 4条（实则 0 为第 1 条，计数从 0 开始）。</p>
 <p>我们把取到的前两条数据作为第一页。</p>
 <p>那么继续取第二页，还是 4 条数据，则SQL语句为：<br><code>SELECT * FROM acgtime.bangumi WHERE title LIKE &#39;%$word%&#39; AND status LIKE &#39;%$week%&#39; LIMIT 4,4;</code></p>
 <h5 id="第三页："><a href="#第三页：" class="headerlink" title="第三页："></a>第三页：</h5><p><code>SELECT * FROM acgtime.bangumi WHERE title LIKE &#39;%$word%&#39; AND status LIKE &#39;%$week%&#39; LIMIT 9,4;</code></p>
@@ -133,7 +133,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xinyuu.socomic.net/2023/02/25/PHP-MYSQL%E5%AE%9E%E7%8E%B0%E7%BF%BB%E9%A1%B5%E5%8A%9F%E8%83%BD/" data-id="clejyr42z0001ywsxdx1mfrof" data-title="PHP+MYSQL实现翻页功能" class="article-share-link">Teilen</a>
+      <a data-url="https://xinyuu.socomic.net/2023/02/25/PHP-MYSQL%E5%AE%9E%E7%8E%B0%E7%BF%BB%E9%A1%B5%E5%8A%9F%E8%83%BD/" data-id="clejyv7as0001b8sxgmp7d97k" data-title="PHP+MYSQL实现翻页功能" class="article-share-link">Teilen</a>
       
       
       
@@ -186,7 +186,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xinyuu.socomic.net/2023/02/22/hello-world/" data-id="clejyr4330002ywsxdlb7a7fx" data-title="Hello World" class="article-share-link">Teilen</a>
+      <a data-url="https://xinyuu.socomic.net/2023/02/22/hello-world/" data-id="clejyv7av0002b8sx4lqw0ei1" data-title="Hello World" class="article-share-link">Teilen</a>
       
       
       
