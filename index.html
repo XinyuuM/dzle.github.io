@@ -63,10 +63,10 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Suche"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://xinyuu.socomic.net"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://xinyuu.socomic.net"></form>
       </div>
     </div>
   </div>
@@ -100,7 +100,8 @@
         <h3 id="拓扑图"><a href="#拓扑图" class="headerlink" title="拓扑图"></a>拓扑图</h3><p><img src="https://img1.socomic.net/static/20230228-tuoputu.png"></p>
 <h3 id="配置Cloud信息"><a href="#配置Cloud信息" class="headerlink" title="配置Cloud信息"></a>配置Cloud信息</h3><p><img src="https://img1.socomic.net/static/Snipaste_2023-02-28_17-48-00.png"></p>
 <h3 id="进入防火墙"><a href="#进入防火墙" class="headerlink" title="进入防火墙"></a>进入防火墙</h3><p><img src="https://img1.socomic.net/static/Snipaste_2023-02-28_17-51-00.png"></p>
-<h4 id="端口配置"><a href="#端口配置" class="headerlink" title="端口配置"></a>端口配置</h4><p>进入防火墙的G0&#x2F;0&#x2F;0 端口进行设置<br><code>int g0/0/0</code>&#x2F;&#x2F;默认配置端口为G0&#x2F;0&#x2F;0<br><code>display this</code>&#x2F;&#x2F;查看端口默认配置信息<br>IP设置（删除默认的管理接口IP，修改为与外部网卡同一网段的IP地址）<br><img src="https://img1.socomic.net/static/20230228-fhq1.png"><br><code>int g0/0/0</code>  &#x2F;&#x2F;进入防火墙默认端口<br><code>undo ip add 192.168.0.1 24</code> &#x2F;&#x2F;删除默认配置<br>查看外部网络配置信息<br><img src="https://img1.socomic.net/static/Snipaste_2023-02-28_17-55-07.png"></p>
+<h4 id="端口配置"><a href="#端口配置" class="headerlink" title="端口配置"></a>端口配置</h4><p>进入防火墙的G0&#x2F;0&#x2F;0 端口进行设置<br><code>int g0/0/0</code>&#x2F;&#x2F;默认配置端口为G0&#x2F;0&#x2F;0<br><code>display this</code>&#x2F;&#x2F;查看端口默认配置信息<br>IP设置（删除默认的管理接口配置）<br><img src="https://img1.socomic.net/static/20230228-fhq1.png"><br><code>undo ip add 192.168.0.1 24</code> </p>
+<p>查看外部网络配置信息<br><img src="https://img1.socomic.net/static/Snipaste_2023-02-28_17-55-07.png"></p>
 <p><code>ip add 192.168.15.1 24</code> &#x2F;&#x2F;外部网卡同一网段的IP地址<br><code>service-manage all permit</code> &#x2F;&#x2F;开启所有管理服务</p>
 <h4 id="保存配置并查看结果"><a href="#保存配置并查看结果" class="headerlink" title="保存配置并查看结果"></a>保存配置并查看结果</h4><p><code>save</code></p>
 <p>配置完成后,就可以在外部浏览器输入IP访问这个管理页面了</p>
@@ -110,7 +111,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xinyuu.socomic.net/2023/02/28/eNSP%E4%BD%BF%E7%94%A8Web%E7%99%BB%E5%BD%95%E5%8D%8E%E4%B8%BA%E9%98%B2%E7%81%AB%E5%A2%99/" data-id="cleo3514x0005vwsx174m4xzh" data-title="eNSP使用Web登录华为USG6000V防火墙控制台" class="article-share-link">Teilen</a>
+      <a data-url="https://xinyuu.socomic.net/2023/02/28/eNSP%E4%BD%BF%E7%94%A8Web%E7%99%BB%E5%BD%95%E5%8D%8E%E4%B8%BA%E9%98%B2%E7%81%AB%E5%A2%99/" data-id="cleo38y2p0004o4sx0jpxawkc" data-title="eNSP使用Web登录华为USG6000V防火墙控制台" class="article-share-link">Share</a>
       
       
       
@@ -183,7 +184,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xinyuu.socomic.net/2023/02/25/PHP-MYSQL%E5%AE%9E%E7%8E%B0%E7%BF%BB%E9%A1%B5%E5%8A%9F%E8%83%BD/" data-id="cleo3514p0001vwsxctdwg19v" data-title="PHP+MYSQL实现翻页功能" class="article-share-link">Teilen</a>
+      <a data-url="https://xinyuu.socomic.net/2023/02/25/PHP-MYSQL%E5%AE%9E%E7%8E%B0%E7%BF%BB%E9%A1%B5%E5%8A%9F%E8%83%BD/" data-id="cleo38y2k0001o4sxgab4byjg" data-title="PHP+MYSQL实现翻页功能" class="article-share-link">Share</a>
       
       
       
@@ -236,7 +237,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xinyuu.socomic.net/2023/02/22/hello-world/" data-id="cleo3514t0002vwsx9l7g88ap" data-title="Hello World" class="article-share-link">Teilen</a>
+      <a data-url="https://xinyuu.socomic.net/2023/02/22/hello-world/" data-id="cleo38y2m0002o4sxb6221eil" data-title="Hello World" class="article-share-link">Share</a>
       
       
       
@@ -278,7 +279,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archiv</h3>
+    <h3 class="widget-title">Archives</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">二月 2023</a></li></ul>
     </div>
@@ -288,7 +289,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">letzter Beitrag</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
         
