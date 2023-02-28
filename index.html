@@ -75,6 +75,50 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-eNSP使用Web登录华为防火墙" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/02/28/eNSP%E4%BD%BF%E7%94%A8Web%E7%99%BB%E5%BD%95%E5%8D%8E%E4%B8%BA%E9%98%B2%E7%81%AB%E5%A2%99/" class="article-date">
+  <time class="dt-published" datetime="2023-02-28T08:57:32.000Z" itemprop="datePublished">2023-02-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/02/28/eNSP%E4%BD%BF%E7%94%A8Web%E7%99%BB%E5%BD%95%E5%8D%8E%E4%B8%BA%E9%98%B2%E7%81%AB%E5%A2%99/">eNSP使用Web登录华为防火墙</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="拓扑图"><a href="#拓扑图" class="headerlink" title="拓扑图"></a>拓扑图</h3><p><img src="https://img1.socomic.net/static/20230228-tuoputu.png"></p>
+<h3 id="端口配置"><a href="#端口配置" class="headerlink" title="端口配置"></a>端口配置</h3><p>进入防火墙的G0&#x2F;0&#x2F;0 端口进行设置<br>IP设置（删除默认的管理接口IP，修改为与外部网卡同一网段的IP地址）<br><img src="https://img1.socomic.net/static/20230228-fhq1.png"><br><code>int g0/0/0</code>  &#x2F;&#x2F;进入防火墙默认端口<br><code>undo ip add 192.168.0.1 24</code> &#x2F;&#x2F;删除默认配置<br><code>ip add 192.168.15.1 24</code> &#x2F;&#x2F;外部网卡同一网段的IP地址<br><code>service-manage all permit</code> &#x2F;&#x2F;开启所有管理服务</p>
+<p>配置完成后,就可以在外部浏览器输入IP访问这个管理页面了</p>
+<p><img src="https://img1.socomic.net/static/Snipaste_2023-02-28_17-24-34.png"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://xinyuu.socomic.net/2023/02/28/eNSP%E4%BD%BF%E7%94%A8Web%E7%99%BB%E5%BD%95%E5%8D%8E%E4%B8%BA%E9%98%B2%E7%81%AB%E5%A2%99/" data-id="cleo1taqp000228sxeh4223au" data-title="eNSP使用Web登录华为防火墙" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eNSP/" rel="tag">eNSP</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-PHP-MYSQL实现翻页功能" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2023/02/25/PHP-MYSQL%E5%AE%9E%E7%8E%B0%E7%BF%BB%E9%A1%B5%E5%8A%9F%E8%83%BD/" class="article-date">
@@ -134,7 +178,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xinyuu.socomic.net/2023/02/25/PHP-MYSQL%E5%AE%9E%E7%8E%B0%E7%BF%BB%E9%A1%B5%E5%8A%9F%E8%83%BD/" data-id="cleo1p2me0001gcsxdqcvcy2w" data-title="PHP+MYSQL实现翻页功能" class="article-share-link">Share</a>
+      <a data-url="https://xinyuu.socomic.net/2023/02/25/PHP-MYSQL%E5%AE%9E%E7%8E%B0%E7%BF%BB%E9%A1%B5%E5%8A%9F%E8%83%BD/" data-id="cleo1taqm000128sx8k6cfp2f" data-title="PHP+MYSQL实现翻页功能" class="article-share-link">Share</a>
       
       
       
@@ -187,7 +231,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xinyuu.socomic.net/2023/02/22/hello-world/" data-id="cleo1p2mh0002gcsxcyst8ag1" data-title="Hello World" class="article-share-link">Share</a>
+      <a data-url="https://xinyuu.socomic.net/2023/02/22/hello-world/" data-id="cleo1taqs000428sx1vnzdww9" data-title="Hello World" class="article-share-link">Share</a>
       
       
       
@@ -212,7 +256,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/" rel="tag">PHP</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/" rel="tag">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eNSP/" rel="tag">eNSP</a></li></ul>
     </div>
   </div>
 
@@ -222,7 +266,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/PHP/" style="font-size: 10px;">PHP</a>
+      <a href="/tags/PHP/" style="font-size: 10px;">PHP</a> <a href="/tags/eNSP/" style="font-size: 10px;">eNSP</a>
     </div>
   </div>
 
@@ -242,6 +286,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2023/02/28/eNSP%E4%BD%BF%E7%94%A8Web%E7%99%BB%E5%BD%95%E5%8D%8E%E4%B8%BA%E9%98%B2%E7%81%AB%E5%A2%99/">eNSP使用Web登录华为防火墙</a>
+          </li>
         
           <li>
             <a href="/2023/02/25/PHP-MYSQL%E5%AE%9E%E7%8E%B0%E7%BF%BB%E9%A1%B5%E5%8A%9F%E8%83%BD/">PHP+MYSQL实现翻页功能</a>
