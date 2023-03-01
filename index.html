@@ -63,10 +63,10 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://xinyuu.socomic.net"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Suche"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://xinyuu.socomic.net"></form>
       </div>
     </div>
   </div>
@@ -74,6 +74,67 @@
 
       <div class="outer">
         <section id="main">
+  
+    <article id="post-eNSP使用路由器Telnet连接华为USG6000V防火墙" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/03/01/eNSP%E4%BD%BF%E7%94%A8%E8%B7%AF%E7%94%B1%E5%99%A8Telnet%E8%BF%9E%E6%8E%A5%E5%8D%8E%E4%B8%BAUSG6000V%E9%98%B2%E7%81%AB%E5%A2%99/" class="article-date">
+  <time class="dt-published" datetime="2023-03-01T11:54:22.000Z" itemprop="datePublished">2023-03-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/03/01/eNSP%E4%BD%BF%E7%94%A8%E8%B7%AF%E7%94%B1%E5%99%A8Telnet%E8%BF%9E%E6%8E%A5%E5%8D%8E%E4%B8%BAUSG6000V%E9%98%B2%E7%81%AB%E5%A2%99/">eNSP使用路由器Telnet连接华为USG6000V防火墙</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h4 id="拓扑图"><a href="#拓扑图" class="headerlink" title="拓扑图"></a>拓扑图</h4><p><img src="https://img1.socomic.net/static/Snipaste_2023-03-01_19-34-41.png"></p>
+<h3 id="防火墙配置"><a href="#防火墙配置" class="headerlink" title="防火墙配置"></a>防火墙配置</h3><p>USG6000V1&gt;<code>sys</code><br>[USG6000V1]<code>sysname FW</code></p>
+<h4 id="端口配置"><a href="#端口配置" class="headerlink" title="端口配置"></a>端口配置</h4><p>[FW]<code>interface GigabitEthernet 1/0/0</code><br>[FW-GigabitEthernet1&#x2F;0&#x2F;0]<code>ip add 192.168.15.254 24</code><br>[FW-GigabitEthernet1&#x2F;0&#x2F;0]<code>undo shutdown</code><br>[FW-GigabitEthernet1&#x2F;0&#x2F;0]<code>service-manage enable</code><br>[FW-GigabitEthernet1&#x2F;0&#x2F;0]<code>service-manage telnet permit</code><br>[FW-GigabitEthernet1&#x2F;0&#x2F;0]<code>q</code></p>
+<h4 id="开启防火墙Telnet服务"><a href="#开启防火墙Telnet服务" class="headerlink" title="开启防火墙Telnet服务"></a>开启防火墙Telnet服务</h4><p>[FW]<code>telnet server enable</code></p>
+<h4 id="配置防火墙区域"><a href="#配置防火墙区域" class="headerlink" title="配置防火墙区域"></a>配置防火墙区域</h4><p>[FW]<code>firewall zone trust</code><br>[FW-zone-trust]<code>add interface GigabitEthernet 1/0/0</code><br>[FW-zone-trust]<code>q</code></p>
+<h4 id="配置安全策略（重要）"><a href="#配置安全策略（重要）" class="headerlink" title="配置安全策略（重要）"></a>配置安全策略（重要）</h4><p>[FW]<code>security-policy</code></p>
+<p>[FW-policy-security]<code>rule name allow_telnet</code></p>
+<p>[FW-policy-security-rule-allow_telnet]<code>source-zone trust </code></p>
+<p>[FW-policy-security-rule-allow_telnet]<code>destination-zone local</code> </p>
+<p>[FW-policy-security-rule-allow_telnet]<code>action permit</code> </p>
+<p>[FW-policy-security-rule-allow_telnet]<code>q</code></p>
+<p>[FW-policy-security]<code>q</code></p>
+<h4 id="Telnet管理员级vty本地用户配置"><a href="#Telnet管理员级vty本地用户配置" class="headerlink" title="Telnet管理员级vty本地用户配置"></a>Telnet管理员级vty本地用户配置</h4><h5 id="vty登录配置"><a href="#vty登录配置" class="headerlink" title="vty登录配置"></a>vty登录配置</h5><p>这里的配置与<a href="https://xinyuu.socomic.net/2023/03/01/eNSP%E4%BD%BF%E7%94%A8Telnet%E7%99%BB%E5%BD%95%E5%8D%8E%E4%B8%BA%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87/">eNSP使用Telnet登录华为网络设备</a>里的<strong>Telnet管理员级vty本地用户配置&#x2F;vty登录配置</strong>章节基本一致，但仍需注意相关参数可能有细微不同。</p>
+<p>[FW]<code>user-interface vty 0 4</code><br>[FW-ui-vty0-4]<code>authentication-mode aaa</code><br>[FW-ui-vty0-4]<code>protocol inbound telnet</code><br>[FW-ui-vty0-4]<code>q</code></p>
+<h5 id="启动AAA服务"><a href="#启动AAA服务" class="headerlink" title="启动AAA服务"></a>启动AAA服务</h5><p>这里的配置与<a href="https://xinyuu.socomic.net/2023/03/01/eNSP%E4%BD%BF%E7%94%A8Telnet%E7%99%BB%E5%BD%95%E5%8D%8E%E4%B8%BA%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87/">eNSP使用Telnet登录华为网络设备</a>里的<strong>Telnet管理员级vty本地用户配置&#x2F;启动AAA服务</strong>章节大同小异，这里需要注意的是，防火墙的管理员密码需要设置得更复杂一些。</p>
+<p>[FW]<code>aaa</code><br>[FW-aaa]<code>manager-user liuxinyu</code><br>[FW-aaa-manager-user-liuxinyu]<code>password cipher lxy@123321</code><br>[FW-aaa-manager-user-liuxinyu]<code>service-type telnet</code><br>[FW-aaa-manager-user-liuxinyu]<code>level 15</code><br>[FW-aaa-manager-user-liuxinyu]<code>q</code><br>[FW-aaa]q<br>[FW]q</p>
+<h3 id="路由器验证"><a href="#路由器验证" class="headerlink" title="路由器验证"></a>路由器验证</h3><h5 id="IP配置"><a href="#IP配置" class="headerlink" title="IP配置"></a>IP配置</h5><p>这里的配置与<a href="https://xinyuu.socomic.net/2023/03/01/eNSP%E4%BD%BF%E7%94%A8Telnet%E7%99%BB%E5%BD%95%E5%8D%8E%E4%B8%BA%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87/">eNSP使用Telnet登录华为网络设备</a>里的<strong>TelnetServer配置&#x2F;配置以太网口</strong>的实现方法相同，这里不在赘述。需要注意端口参数可能不同。</p>
+<p>退出端口配置模式，进入到用户模式</p>
+<h5 id="使用路由器管理Telnet管理防火墙"><a href="#使用路由器管理Telnet管理防火墙" class="headerlink" title="使用路由器管理Telnet管理防火墙"></a>使用路由器管理Telnet管理防火墙</h5><p><code>telnet 防火墙IP</code> </p>
+<p>输入之前配置的远程管理用户名与密码即可。</p>
+<p><img src="https://img1.socomic.net/static/Snipaste_2023-03-01_19-19-59.png"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://xinyuu.socomic.net/2023/03/01/eNSP%E4%BD%BF%E7%94%A8%E8%B7%AF%E7%94%B1%E5%99%A8Telnet%E8%BF%9E%E6%8E%A5%E5%8D%8E%E4%B8%BAUSG6000V%E9%98%B2%E7%81%AB%E5%A2%99/" data-id="clepocijo00052osx0vs5ff7y" data-title="eNSP使用路由器Telnet连接华为USG6000V防火墙" class="article-share-link">Teilen</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eNSP/" rel="tag">eNSP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8D%8E%E4%B8%BA%E9%98%B2%E7%81%AB%E5%A2%99/" rel="tag">华为防火墙</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
   
     <article id="post-eNSP使用Telnet登录华为网络设备" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
@@ -100,41 +161,41 @@
         <h2 id="使用Telnet远程管理路由器"><a href="#使用Telnet远程管理路由器" class="headerlink" title="使用Telnet远程管理路由器"></a>使用Telnet远程管理路由器</h2><h3 id="简单的Telnet登录"><a href="#简单的Telnet登录" class="headerlink" title="简单的Telnet登录"></a>简单的Telnet登录</h3><h5 id="实验拓扑图"><a href="#实验拓扑图" class="headerlink" title="实验拓扑图"></a>实验拓扑图</h5><p><img src="https://img1.socomic.net/static/Snipaste_2023-03-01_13-30-55.png"></p>
 <p>users:AR201 192.168.1.1 &#x2F;24</p>
 <p>Server: AR2240 192.168.1.254 &#x2F;24</p>
-<h5 id="TelnetServer配置"><a href="#TelnetServer配置" class="headerlink" title="TelnetServer配置"></a>TelnetServer配置</h5><h6 id="进入路由器"><a href="#进入路由器" class="headerlink" title="进入路由器"></a>进入路由器</h6><p><code>&lt;Huawei&gt;sys</code><br>Enter system view, return user view with Ctrl+Z.<br>[Huawei]<code>sysname TelnetServer</code></p>
-<h6 id="限制vty人数"><a href="#限制vty人数" class="headerlink" title="限制vty人数"></a>限制vty人数</h6><p>[TelnetServer]<code>user-interface maximum-vty 1</code><br>[TelnetServer]<code>user-int vty 0</code></p>
+<h5 id="TelnetServer配置"><a href="#TelnetServer配置" class="headerlink" title="TelnetServer配置"></a>TelnetServer配置</h5><h6 id="进入路由器"><a href="#进入路由器" class="headerlink" title="进入路由器"></a>进入路由器</h6><p>Huawei&gt;<code>sys</code><br>Enter system view, return user view with Ctrl+Z.<br>[Huawei]<code>sysname TelnetServer</code></p>
+<h6 id="限制vty人数"><a href="#限制vty人数" class="headerlink" title="限制vty人数"></a>限制vty人数</h6><p>[TelnetServer]<code>user-interface maximum-vty 1</code><br>[TelnetServer]<code>user-int vty 0 5 </code></p>
 <h6 id="设置Telnet远程登录密码"><a href="#设置Telnet远程登录密码" class="headerlink" title="设置Telnet远程登录密码"></a>设置Telnet远程登录密码</h6><p>[TelnetServer-ui-vty0]<code>authentication-mode password</code><br>Please configure the login password (maximum length 16):<code>123321</code><br>[TelnetServer-ui-vty0]<code>q</code></p>
 <h6 id="配置以太网口"><a href="#配置以太网口" class="headerlink" title="配置以太网口"></a>配置以太网口</h6><p>[TelnetServer]interface g0&#x2F;0&#x2F;0<br>[TelnetServer-GigabitEthernet0&#x2F;0&#x2F;0]<code>ip add 192.198.1.254 24</code></p>
 <h5 id="Telnet客户端配置"><a href="#Telnet客户端配置" class="headerlink" title="Telnet客户端配置"></a>Telnet客户端配置</h5><p>进入路由器</p>
-<p><code>&lt;Huawei&gt;sys</code></p>
+<p>Huawei&gt;<code>sys</code></p>
 <h5 id="进入vlan端口"><a href="#进入vlan端口" class="headerlink" title="进入vlan端口"></a>进入vlan端口</h5><p>[Huawei]<code>interface vlan 1</code></p>
 <h6 id="配置IP"><a href="#配置IP" class="headerlink" title="配置IP"></a>配置IP</h6><p>[Huawei-Vlanif1]<code>ip add 192.168.15.1 24</code></p>
 <h5 id="保存退出"><a href="#保存退出" class="headerlink" title="保存退出"></a>保存退出</h5><p>[Huawei-Vlanif1]<code>q</code><br>[Huawei]<code>q</code></p>
 <h5 id="测试ping"><a href="#测试ping" class="headerlink" title="测试ping"></a>测试ping</h5><p>[Huawei-Vlanif1]<code>ping 192.168.1.254</code><br>  PING 192.168.15.254: 56  data bytes, press CTRL_C to break<br>    Reply from 192.168.15.254: bytes&#x3D;56 Sequence&#x3D;1 ttl&#x3D;255 time&#x3D;90 ms<br>    Reply from 192.168.15.254: bytes&#x3D;56 Sequence&#x3D;2 ttl&#x3D;255 time&#x3D;20 ms<br>    Reply from 192.168.15.254: bytes&#x3D;56 Sequence&#x3D;3 ttl&#x3D;255 time&#x3D;20 ms<br>    Reply from 192.168.15.254: bytes&#x3D;56 Sequence&#x3D;4 ttl&#x3D;255 time&#x3D;30 ms<br>    Reply from 192.168.15.254: bytes&#x3D;56 Sequence&#x3D;5 ttl&#x3D;255 time&#x3D;10 ms</p>
-<h5 id="尝试使用Telnet远程连接TelnetServer"><a href="#尝试使用Telnet远程连接TelnetServer" class="headerlink" title="尝试使用Telnet远程连接TelnetServer"></a>尝试使用Telnet远程连接TelnetServer</h5><p><code>&lt;Huawei&gt;telnet 192.168.1.254</code><br>  Press CTRL_] to quit telnet mode<br>  Trying 192.168.1.254 …<br>  Connected to 192.168.1.254 …</p>
+<h5 id="尝试使用Telnet远程连接TelnetServer"><a href="#尝试使用Telnet远程连接TelnetServer" class="headerlink" title="尝试使用Telnet远程连接TelnetServer"></a>尝试使用Telnet远程连接TelnetServer</h5><p>Huawei&gt;<code>telnet 192.168.1.254</code><br>  Press CTRL_] to quit telnet mode<br>  Trying 192.168.1.254 …<br>  Connected to 192.168.1.254 …</p>
 <p>Login authentication</p>
-<p>Password:<br><TelnetServer></p>
+<p>Password:<br>TelnetServer&gt;</p>
 <h3 id="Telnet管理员级vty本地用户配置"><a href="#Telnet管理员级vty本地用户配置" class="headerlink" title="Telnet管理员级vty本地用户配置"></a>Telnet管理员级vty本地用户配置</h3><p>通常情况下Telnet配置登录时需要验证账号与密码</p>
 <p>于是在简单配置基础基础之上，我们可以使用管员级别的账户来远程配置路由。</p>
-<h5 id="Telnet服务器端配置"><a href="#Telnet服务器端配置" class="headerlink" title="Telnet服务器端配置"></a>Telnet服务器端配置</h5><h6 id="启动AAA服务"><a href="#启动AAA服务" class="headerlink" title="启动AAA服务"></a>启动AAA服务</h6><p><code>&lt;TelnetServer&gt;sys</code></p>
+<h5 id="Telnet服务器端配置"><a href="#Telnet服务器端配置" class="headerlink" title="Telnet服务器端配置"></a>Telnet服务器端配置</h5><h6 id="启动AAA服务"><a href="#启动AAA服务" class="headerlink" title="启动AAA服务"></a>启动AAA服务</h6><p>TelnetServer&gt;sys</p>
 <p>[TelnetServer]<code>aaa</code></p>
 <h6 id="在AAA服务器上创建本地登录账号"><a href="#在AAA服务器上创建本地登录账号" class="headerlink" title="在AAA服务器上创建本地登录账号"></a>在AAA服务器上创建本地登录账号</h6><p>账号为lxy ，密码为123321 权限级别为3级</p>
 <p>[TelnetServer-aaa]<code>local-user lxy password cipher 123321 privilege level 3</code></p>
 <p>[TelnetServer-aaa]<code>local-user lxy service-type telnet</code></p>
 <p>[TelnetServer-aaa]<code>q</code></p>
-<h6 id="vty登录配置"><a href="#vty登录配置" class="headerlink" title="vty登录配置"></a>vty登录配置</h6><p>[TelnetServer]<code>user-interface vty 0</code></p>
-<p>[TelnetServer-ui-vty0]<code>authentication-mode aaa</code></p>
-<h5 id="保存退出-1"><a href="#保存退出-1" class="headerlink" title="保存退出"></a>保存退出</h5><p>[TelnetServer-ui-vty0]<code>q</code></p>
+<h6 id="vty登录配置"><a href="#vty登录配置" class="headerlink" title="vty登录配置"></a>vty登录配置</h6><p>[TelnetServer]<code>user-interface vty 0 5</code></p>
+<p>[TelnetServer-ui-vty0-5]<code>authentication-mode aaa</code></p>
+<h5 id="保存退出-1"><a href="#保存退出-1" class="headerlink" title="保存退出"></a>保存退出</h5><p>[TelnetServer-ui-vty0 5]<code>q</code></p>
 <h5 id="Telnet客户端验证"><a href="#Telnet客户端验证" class="headerlink" title="Telnet客户端验证"></a>Telnet客户端验证</h5><p>在简单配置基础基础之上，使用管员级别的账户来远程配置路由。</p>
 <p><code>&lt;Huawei&gt;telnet 192.168.1.254</code><br>  Press CTRL_] to quit telnet mode<br>  Trying 192.168.1.254 …<br>  Connected to 192.168.1.254 …</p>
 <p>Login authentication</p>
-<p>Username:<code>lxy</code><br>Password:<br><TelnetServer></p>
+<p>Username:<code>lxy</code><br>Password:<br>TelnetServer&gt;</p>
 <h3 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h3><h4 id="umooc-gdgm-cn"><a href="#umooc-gdgm-cn" class="headerlink" title="umooc.gdgm.cn"></a>umooc.gdgm.cn</h4><p>华为设备项目实践-<a target="_blank" rel="noopener" href="https://umooc.gdgm.cn/meol/jpk/course/layout/newpage/index.jsp?courseId=12182">0201C-21010-抓取telnet明文密码</a></p>
 <p>华为设备项目实践-<a target="_blank" rel="noopener" href="https://umooc.gdgm.cn/meol/jpk/course/layout/newpage/index.jsp?courseId=12182">0201A-21009C-Telnet管理员级vty本地用户配置实验</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xinyuu.socomic.net/2023/03/01/eNSP%E4%BD%BF%E7%94%A8Telnet%E7%99%BB%E5%BD%95%E5%8D%8E%E4%B8%BA%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87/" data-id="clepcf4oa0004jwsx7lea976s" data-title="eNSP使用Telnet登录华为网络设备" class="article-share-link">Share</a>
+      <a data-url="https://xinyuu.socomic.net/2023/03/01/eNSP%E4%BD%BF%E7%94%A8Telnet%E7%99%BB%E5%BD%95%E5%8D%8E%E4%B8%BA%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87/" data-id="clepocijm00042osxhqdu69n7" data-title="eNSP使用Telnet登录华为网络设备" class="article-share-link">Teilen</a>
       
       
       
@@ -189,7 +250,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xinyuu.socomic.net/2023/02/28/eNSP%E4%BD%BF%E7%94%A8Web%E7%99%BB%E5%BD%95%E5%8D%8E%E4%B8%BA%E9%98%B2%E7%81%AB%E5%A2%99/" data-id="clepcf4o70002jwsx72un5qai" data-title="eNSP使用Web登录华为USG6000V防火墙控制台" class="article-share-link">Share</a>
+      <a data-url="https://xinyuu.socomic.net/2023/02/28/eNSP%E4%BD%BF%E7%94%A8Web%E7%99%BB%E5%BD%95%E5%8D%8E%E4%B8%BA%E9%98%B2%E7%81%AB%E5%A2%99/" data-id="clepocijj00022osx7m504f6d" data-title="eNSP使用Web登录华为USG6000V防火墙控制台" class="article-share-link">Teilen</a>
       
       
       
@@ -262,7 +323,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xinyuu.socomic.net/2023/02/25/PHP-MYSQL%E5%AE%9E%E7%8E%B0%E7%BF%BB%E9%A1%B5%E5%8A%9F%E8%83%BD/" data-id="clepcf4o50001jwsx5gqr0jcs" data-title="PHP+MYSQL实现翻页功能" class="article-share-link">Share</a>
+      <a data-url="https://xinyuu.socomic.net/2023/02/25/PHP-MYSQL%E5%AE%9E%E7%8E%B0%E7%BF%BB%E9%A1%B5%E5%8A%9F%E8%83%BD/" data-id="clepocijg00012osx23jq8rxc" data-title="PHP+MYSQL实现翻页功能" class="article-share-link">Teilen</a>
       
       
       
@@ -315,7 +376,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xinyuu.socomic.net/2023/02/22/hello-world/" data-id="clepcf4of000ejwsx9qo8gvqj" data-title="Hello World" class="article-share-link">Share</a>
+      <a data-url="https://xinyuu.socomic.net/2023/02/22/hello-world/" data-id="clepocijq00062osx4wn07h96" data-title="Hello World" class="article-share-link">Teilen</a>
       
       
       
@@ -350,14 +411,14 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/PHP/" style="font-size: 10px;">PHP</a> <a href="/tags/eNSP/" style="font-size: 20px;">eNSP</a> <a href="/tags/%E5%8D%8E%E4%B8%BA%E8%AE%BE%E5%A4%87%E9%A1%B9%E7%9B%AE%E5%AE%9E%E8%B7%B5/" style="font-size: 10px;">华为设备项目实践</a> <a href="/tags/%E5%8D%8E%E4%B8%BA%E9%98%B2%E7%81%AB%E5%A2%99/" style="font-size: 10px;">华为防火墙</a>
+      <a href="/tags/PHP/" style="font-size: 10px;">PHP</a> <a href="/tags/eNSP/" style="font-size: 20px;">eNSP</a> <a href="/tags/%E5%8D%8E%E4%B8%BA%E8%AE%BE%E5%A4%87%E9%A1%B9%E7%9B%AE%E5%AE%9E%E8%B7%B5/" style="font-size: 10px;">华为设备项目实践</a> <a href="/tags/%E5%8D%8E%E4%B8%BA%E9%98%B2%E7%81%AB%E5%A2%99/" style="font-size: 15px;">华为防火墙</a>
     </div>
   </div>
 
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">Archiv</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">三月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">二月 2023</a></li></ul>
     </div>
@@ -367,9 +428,13 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">letzter Beitrag</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2023/03/01/eNSP%E4%BD%BF%E7%94%A8%E8%B7%AF%E7%94%B1%E5%99%A8Telnet%E8%BF%9E%E6%8E%A5%E5%8D%8E%E4%B8%BAUSG6000V%E9%98%B2%E7%81%AB%E5%A2%99/">eNSP使用路由器Telnet连接华为USG6000V防火墙</a>
+          </li>
         
           <li>
             <a href="/2023/03/01/eNSP%E4%BD%BF%E7%94%A8Telnet%E7%99%BB%E5%BD%95%E5%8D%8E%E4%B8%BA%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87/">eNSP使用Telnet登录华为网络设备</a>

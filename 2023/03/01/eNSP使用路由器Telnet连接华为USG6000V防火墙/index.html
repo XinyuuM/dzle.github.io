@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>eNSP使用路由器Telnet连接华为USG6000V防火墙 | Xinyuu的自由天空</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="拓扑图 防火墙配置USG6000V1&gt;sys[USG6000V1]sysname FW 端口配置[FW]interface GigabitEthernet 1&#x2F;0&#x2F;0[FW-GigabitEthernet1&#x2F;0&#x2F;0]ip add 192.168.15.254 24[FW-GigabitEthernet1&#x2F;0&#x2F;0]undo shutdown[FW-Gig">
+<meta property="og:type" content="article">
+<meta property="og:title" content="eNSP使用路由器Telnet连接华为USG6000V防火墙">
+<meta property="og:url" content="https://xinyuu.socomic.net/2023/03/01/eNSP%E4%BD%BF%E7%94%A8%E8%B7%AF%E7%94%B1%E5%99%A8Telnet%E8%BF%9E%E6%8E%A5%E5%8D%8E%E4%B8%BAUSG6000V%E9%98%B2%E7%81%AB%E5%A2%99/index.html">
+<meta property="og:site_name" content="Xinyuu的自由天空">
+<meta property="og:description" content="拓扑图 防火墙配置USG6000V1&gt;sys[USG6000V1]sysname FW 端口配置[FW]interface GigabitEthernet 1&#x2F;0&#x2F;0[FW-GigabitEthernet1&#x2F;0&#x2F;0]ip add 192.168.15.254 24[FW-GigabitEthernet1&#x2F;0&#x2F;0]undo shutdown[FW-Gig">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img1.socomic.net/static/Snipaste_2023-03-01_19-34-41.png">
+<meta property="og:image" content="https://img1.socomic.net/static/Snipaste_2023-03-01_19-19-59.png">
+<meta property="article:published_time" content="2023-03-01T11:54:22.000Z">
+<meta property="article:modified_time" content="2023-03-01T12:48:44.507Z">
+<meta property="article:author" content="Xinyuu">
+<meta property="article:tag" content="eNSP">
+<meta property="article:tag" content="华为防火墙">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img1.socomic.net/static/Snipaste_2023-03-01_19-34-41.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Xinyuu的自由天空" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Xinyuu的自由天空</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">HI Morning</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Suche"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://xinyuu.socomic.net"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-eNSP使用路由器Telnet连接华为USG6000V防火墙" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/03/01/eNSP%E4%BD%BF%E7%94%A8%E8%B7%AF%E7%94%B1%E5%99%A8Telnet%E8%BF%9E%E6%8E%A5%E5%8D%8E%E4%B8%BAUSG6000V%E9%98%B2%E7%81%AB%E5%A2%99/" class="article-date">
+  <time class="dt-published" datetime="2023-03-01T11:54:22.000Z" itemprop="datePublished">2023-03-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      eNSP使用路由器Telnet连接华为USG6000V防火墙
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h4 id="拓扑图"><a href="#拓扑图" class="headerlink" title="拓扑图"></a>拓扑图</h4><p><img src="https://img1.socomic.net/static/Snipaste_2023-03-01_19-34-41.png"></p>
+<h3 id="防火墙配置"><a href="#防火墙配置" class="headerlink" title="防火墙配置"></a>防火墙配置</h3><p>USG6000V1&gt;<code>sys</code><br>[USG6000V1]<code>sysname FW</code></p>
+<h4 id="端口配置"><a href="#端口配置" class="headerlink" title="端口配置"></a>端口配置</h4><p>[FW]<code>interface GigabitEthernet 1/0/0</code><br>[FW-GigabitEthernet1&#x2F;0&#x2F;0]<code>ip add 192.168.15.254 24</code><br>[FW-GigabitEthernet1&#x2F;0&#x2F;0]<code>undo shutdown</code><br>[FW-GigabitEthernet1&#x2F;0&#x2F;0]<code>service-manage enable</code><br>[FW-GigabitEthernet1&#x2F;0&#x2F;0]<code>service-manage telnet permit</code><br>[FW-GigabitEthernet1&#x2F;0&#x2F;0]<code>q</code></p>
+<h4 id="开启防火墙Telnet服务"><a href="#开启防火墙Telnet服务" class="headerlink" title="开启防火墙Telnet服务"></a>开启防火墙Telnet服务</h4><p>[FW]<code>telnet server enable</code></p>
+<h4 id="配置防火墙区域"><a href="#配置防火墙区域" class="headerlink" title="配置防火墙区域"></a>配置防火墙区域</h4><p>[FW]<code>firewall zone trust</code><br>[FW-zone-trust]<code>add interface GigabitEthernet 1/0/0</code><br>[FW-zone-trust]<code>q</code></p>
+<h4 id="配置安全策略（重要）"><a href="#配置安全策略（重要）" class="headerlink" title="配置安全策略（重要）"></a>配置安全策略（重要）</h4><p>[FW]<code>security-policy</code></p>
+<p>[FW-policy-security]<code>rule name allow_telnet</code></p>
+<p>[FW-policy-security-rule-allow_telnet]<code>source-zone trust </code></p>
+<p>[FW-policy-security-rule-allow_telnet]<code>destination-zone local</code> </p>
+<p>[FW-policy-security-rule-allow_telnet]<code>action permit</code> </p>
+<p>[FW-policy-security-rule-allow_telnet]<code>q</code></p>
+<p>[FW-policy-security]<code>q</code></p>
+<h4 id="Telnet管理员级vty本地用户配置"><a href="#Telnet管理员级vty本地用户配置" class="headerlink" title="Telnet管理员级vty本地用户配置"></a>Telnet管理员级vty本地用户配置</h4><h5 id="vty登录配置"><a href="#vty登录配置" class="headerlink" title="vty登录配置"></a>vty登录配置</h5><p>这里的配置与<a href="https://xinyuu.socomic.net/2023/03/01/eNSP%E4%BD%BF%E7%94%A8Telnet%E7%99%BB%E5%BD%95%E5%8D%8E%E4%B8%BA%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87/">eNSP使用Telnet登录华为网络设备</a>里的<strong>Telnet管理员级vty本地用户配置&#x2F;vty登录配置</strong>章节基本一致，但仍需注意相关参数可能有细微不同。</p>
+<p>[FW]<code>user-interface vty 0 4</code><br>[FW-ui-vty0-4]<code>authentication-mode aaa</code><br>[FW-ui-vty0-4]<code>protocol inbound telnet</code><br>[FW-ui-vty0-4]<code>q</code></p>
+<h5 id="启动AAA服务"><a href="#启动AAA服务" class="headerlink" title="启动AAA服务"></a>启动AAA服务</h5><p>这里的配置与<a href="https://xinyuu.socomic.net/2023/03/01/eNSP%E4%BD%BF%E7%94%A8Telnet%E7%99%BB%E5%BD%95%E5%8D%8E%E4%B8%BA%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87/">eNSP使用Telnet登录华为网络设备</a>里的<strong>Telnet管理员级vty本地用户配置&#x2F;启动AAA服务</strong>章节大同小异，这里需要注意的是，防火墙的管理员密码需要设置得更复杂一些。</p>
+<p>[FW]<code>aaa</code><br>[FW-aaa]<code>manager-user liuxinyu</code><br>[FW-aaa-manager-user-liuxinyu]<code>password cipher lxy@123321</code><br>[FW-aaa-manager-user-liuxinyu]<code>service-type telnet</code><br>[FW-aaa-manager-user-liuxinyu]<code>level 15</code><br>[FW-aaa-manager-user-liuxinyu]<code>q</code><br>[FW-aaa]q<br>[FW]q</p>
+<h3 id="路由器验证"><a href="#路由器验证" class="headerlink" title="路由器验证"></a>路由器验证</h3><h5 id="IP配置"><a href="#IP配置" class="headerlink" title="IP配置"></a>IP配置</h5><p>这里的配置与<a href="https://xinyuu.socomic.net/2023/03/01/eNSP%E4%BD%BF%E7%94%A8Telnet%E7%99%BB%E5%BD%95%E5%8D%8E%E4%B8%BA%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87/">eNSP使用Telnet登录华为网络设备</a>里的<strong>TelnetServer配置&#x2F;配置以太网口</strong>的实现方法相同，这里不在赘述。需要注意端口参数可能不同。</p>
+<p>退出端口配置模式，进入到用户模式</p>
+<h5 id="使用路由器管理Telnet管理防火墙"><a href="#使用路由器管理Telnet管理防火墙" class="headerlink" title="使用路由器管理Telnet管理防火墙"></a>使用路由器管理Telnet管理防火墙</h5><p><code>telnet 防火墙IP</code> </p>
+<p>输入之前配置的远程管理用户名与密码即可。</p>
+<p><img src="https://img1.socomic.net/static/Snipaste_2023-03-01_19-19-59.png"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://xinyuu.socomic.net/2023/03/01/eNSP%E4%BD%BF%E7%94%A8%E8%B7%AF%E7%94%B1%E5%99%A8Telnet%E8%BF%9E%E6%8E%A5%E5%8D%8E%E4%B8%BAUSG6000V%E9%98%B2%E7%81%AB%E5%A2%99/" data-id="clepocijo00052osx0vs5ff7y" data-title="eNSP使用路由器Telnet连接华为USG6000V防火墙" class="article-share-link">Teilen</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eNSP/" rel="tag">eNSP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8D%8E%E4%B8%BA%E9%98%B2%E7%81%AB%E5%A2%99/" rel="tag">华为防火墙</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2023/03/01/eNSP%E4%BD%BF%E7%94%A8Telnet%E7%99%BB%E5%BD%95%E5%8D%8E%E4%B8%BA%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title">eNSP使用Telnet登录华为网络设备</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/" rel="tag">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eNSP/" rel="tag">eNSP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%8E%E4%B8%BA%E8%AE%BE%E5%A4%87%E9%A1%B9%E7%9B%AE%E5%AE%9E%E8%B7%B5/" rel="tag">华为设备项目实践</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%8E%E4%B8%BA%E9%98%B2%E7%81%AB%E5%A2%99/" rel="tag">华为防火墙</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/PHP/" style="font-size: 10px;">PHP</a> <a href="/tags/eNSP/" style="font-size: 20px;">eNSP</a> <a href="/tags/%E5%8D%8E%E4%B8%BA%E8%AE%BE%E5%A4%87%E9%A1%B9%E7%9B%AE%E5%AE%9E%E8%B7%B5/" style="font-size: 10px;">华为设备项目实践</a> <a href="/tags/%E5%8D%8E%E4%B8%BA%E9%98%B2%E7%81%AB%E5%A2%99/" style="font-size: 15px;">华为防火墙</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">三月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">二月 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/03/01/eNSP%E4%BD%BF%E7%94%A8%E8%B7%AF%E7%94%B1%E5%99%A8Telnet%E8%BF%9E%E6%8E%A5%E5%8D%8E%E4%B8%BAUSG6000V%E9%98%B2%E7%81%AB%E5%A2%99/">eNSP使用路由器Telnet连接华为USG6000V防火墙</a>
+          </li>
+        
+          <li>
+            <a href="/2023/03/01/eNSP%E4%BD%BF%E7%94%A8Telnet%E7%99%BB%E5%BD%95%E5%8D%8E%E4%B8%BA%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87/">eNSP使用Telnet登录华为网络设备</a>
+          </li>
+        
+          <li>
+            <a href="/2023/02/28/eNSP%E4%BD%BF%E7%94%A8Web%E7%99%BB%E5%BD%95%E5%8D%8E%E4%B8%BA%E9%98%B2%E7%81%AB%E5%A2%99/">eNSP使用Web登录华为USG6000V防火墙控制台</a>
+          </li>
+        
+          <li>
+            <a href="/2023/02/25/PHP-MYSQL%E5%AE%9E%E7%8E%B0%E7%BF%BB%E9%A1%B5%E5%8A%9F%E8%83%BD/">PHP+MYSQL实现翻页功能</a>
+          </li>
+        
+          <li>
+            <a href="/2023/02/22/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 Xinyuu<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
