@@ -6,16 +6,16 @@
   
   <title>eNSP使用Telnet登录华为网络设备 | Xinyuu的自由天空</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="使用Telnet远程管理路由器简单的Telnet登录实验拓扑图 TelnetServer配置进入路由器sysEnter system view, return user view with Ctrl+Z.[Huawei]sysname TelnetServer 限制vty人数[TelnetServer]user-interface maximum-vty 1[TelnetServer]user-i">
+  <meta name="description" content="使用Telnet远程管理路由器简单的Telnet登录实验拓扑图 users:AR201 192.168.1.1 &#x2F;24 Server: AR2240 192.168.1.254 &#x2F;24 TelnetServer配置进入路由器&lt;Huawei&gt;sysEnter system view, return user view with Ctrl+Z.[Huawei]sysna">
 <meta property="og:type" content="article">
 <meta property="og:title" content="eNSP使用Telnet登录华为网络设备">
 <meta property="og:url" content="https://xinyuu.socomic.net/2023/03/01/eNSP%E4%BD%BF%E7%94%A8Telnet%E7%99%BB%E5%BD%95%E5%8D%8E%E4%B8%BA%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87/index.html">
 <meta property="og:site_name" content="Xinyuu的自由天空">
-<meta property="og:description" content="使用Telnet远程管理路由器简单的Telnet登录实验拓扑图 TelnetServer配置进入路由器sysEnter system view, return user view with Ctrl+Z.[Huawei]sysname TelnetServer 限制vty人数[TelnetServer]user-interface maximum-vty 1[TelnetServer]user-i">
+<meta property="og:description" content="使用Telnet远程管理路由器简单的Telnet登录实验拓扑图 users:AR201 192.168.1.1 &#x2F;24 Server: AR2240 192.168.1.254 &#x2F;24 TelnetServer配置进入路由器&lt;Huawei&gt;sysEnter system view, return user view with Ctrl+Z.[Huawei]sysna">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img1.socomic.net/static/Snipaste_2023-03-01_13-30-55.png">
 <meta property="article:published_time" content="2023-03-01T03:52:34.000Z">
-<meta property="article:modified_time" content="2023-03-01T07:06:15.923Z">
+<meta property="article:modified_time" content="2023-03-01T07:15:01.439Z">
 <meta property="article:author" content="Xinyuu">
 <meta property="article:tag" content="eNSP">
 <meta property="article:tag" content="华为设备项目实践">
@@ -71,10 +71,10 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Suche"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://xinyuu.socomic.net"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://xinyuu.socomic.net"></form>
       </div>
     </div>
   </div>
@@ -104,22 +104,24 @@
     <div class="e-content article-entry" itemprop="articleBody">
       
         <h2 id="使用Telnet远程管理路由器"><a href="#使用Telnet远程管理路由器" class="headerlink" title="使用Telnet远程管理路由器"></a>使用Telnet远程管理路由器</h2><h3 id="简单的Telnet登录"><a href="#简单的Telnet登录" class="headerlink" title="简单的Telnet登录"></a>简单的Telnet登录</h3><h5 id="实验拓扑图"><a href="#实验拓扑图" class="headerlink" title="实验拓扑图"></a>实验拓扑图</h5><p><img src="https://img1.socomic.net/static/Snipaste_2023-03-01_13-30-55.png"></p>
-<h5 id="TelnetServer配置"><a href="#TelnetServer配置" class="headerlink" title="TelnetServer配置"></a>TelnetServer配置</h5><h6 id="进入路由器"><a href="#进入路由器" class="headerlink" title="进入路由器"></a>进入路由器</h6><p><Huawei><code>sys</code><br>Enter system view, return user view with Ctrl+Z.<br>[Huawei]<code>sysname TelnetServer</code></p>
+<p>users:AR201 192.168.1.1 &#x2F;24</p>
+<p>Server: AR2240 192.168.1.254 &#x2F;24</p>
+<h5 id="TelnetServer配置"><a href="#TelnetServer配置" class="headerlink" title="TelnetServer配置"></a>TelnetServer配置</h5><h6 id="进入路由器"><a href="#进入路由器" class="headerlink" title="进入路由器"></a>进入路由器</h6><p><code>&lt;Huawei&gt;sys</code><br>Enter system view, return user view with Ctrl+Z.<br>[Huawei]<code>sysname TelnetServer</code></p>
 <h6 id="限制vty人数"><a href="#限制vty人数" class="headerlink" title="限制vty人数"></a>限制vty人数</h6><p>[TelnetServer]<code>user-interface maximum-vty 1</code><br>[TelnetServer]<code>user-int vty 0</code></p>
 <h6 id="设置Telnet远程登录密码"><a href="#设置Telnet远程登录密码" class="headerlink" title="设置Telnet远程登录密码"></a>设置Telnet远程登录密码</h6><p>[TelnetServer-ui-vty0]<code>authentication-mode password</code><br>Please configure the login password (maximum length 16):<code>123321</code><br>[TelnetServer-ui-vty0]<code>q</code></p>
 <h6 id="配置以太网口"><a href="#配置以太网口" class="headerlink" title="配置以太网口"></a>配置以太网口</h6><p>[TelnetServer]interface g0&#x2F;0&#x2F;0<br>[TelnetServer-GigabitEthernet0&#x2F;0&#x2F;0]<code>ip add 192.198.1.254 24</code></p>
 <h5 id="Telnet客户端配置"><a href="#Telnet客户端配置" class="headerlink" title="Telnet客户端配置"></a>Telnet客户端配置</h5><p>进入路由器</p>
-<p><Huawei><code>sys</code></p>
+<p><code>&lt;Huawei&gt;sys</code></p>
 <h5 id="进入vlan端口"><a href="#进入vlan端口" class="headerlink" title="进入vlan端口"></a>进入vlan端口</h5><p>[Huawei]<code>interface vlan 1</code></p>
 <h6 id="配置IP"><a href="#配置IP" class="headerlink" title="配置IP"></a>配置IP</h6><p>[Huawei-Vlanif1]<code>ip add 192.168.15.1 24</code></p>
 <h5 id="保存退出"><a href="#保存退出" class="headerlink" title="保存退出"></a>保存退出</h5><p>[Huawei-Vlanif1]<code>q</code><br>[Huawei]<code>q</code></p>
 <h5 id="测试ping"><a href="#测试ping" class="headerlink" title="测试ping"></a>测试ping</h5><p>[Huawei-Vlanif1]<code>ping 192.168.1.254</code><br>  PING 192.168.15.254: 56  data bytes, press CTRL_C to break<br>    Reply from 192.168.15.254: bytes&#x3D;56 Sequence&#x3D;1 ttl&#x3D;255 time&#x3D;90 ms<br>    Reply from 192.168.15.254: bytes&#x3D;56 Sequence&#x3D;2 ttl&#x3D;255 time&#x3D;20 ms<br>    Reply from 192.168.15.254: bytes&#x3D;56 Sequence&#x3D;3 ttl&#x3D;255 time&#x3D;20 ms<br>    Reply from 192.168.15.254: bytes&#x3D;56 Sequence&#x3D;4 ttl&#x3D;255 time&#x3D;30 ms<br>    Reply from 192.168.15.254: bytes&#x3D;56 Sequence&#x3D;5 ttl&#x3D;255 time&#x3D;10 ms</p>
-<h5 id="尝试使用Telnet远程连接TelnetServer"><a href="#尝试使用Telnet远程连接TelnetServer" class="headerlink" title="尝试使用Telnet远程连接TelnetServer"></a>尝试使用Telnet远程连接TelnetServer</h5><p><Huawei><code>telnet 192.168.1.254</code><br>  Press CTRL_] to quit telnet mode<br>  Trying 192.168.1.254 …<br>  Connected to 192.168.1.254 …</p>
+<h5 id="尝试使用Telnet远程连接TelnetServer"><a href="#尝试使用Telnet远程连接TelnetServer" class="headerlink" title="尝试使用Telnet远程连接TelnetServer"></a>尝试使用Telnet远程连接TelnetServer</h5><p><code>&lt;Huawei&gt;telnet 192.168.1.254</code><br>  Press CTRL_] to quit telnet mode<br>  Trying 192.168.1.254 …<br>  Connected to 192.168.1.254 …</p>
 <p>Login authentication</p>
 <p>Password:<br><TelnetServer></p>
 <h3 id="Telnet管理员级vty本地用户配置"><a href="#Telnet管理员级vty本地用户配置" class="headerlink" title="Telnet管理员级vty本地用户配置"></a>Telnet管理员级vty本地用户配置</h3><p>通常情况下Telnet配置登录时需要验证账号与密码</p>
 <p>于是在简单配置基础基础之上，我们可以使用管员级别的账户来远程配置路由。</p>
-<h5 id="Telnet服务器端配置"><a href="#Telnet服务器端配置" class="headerlink" title="Telnet服务器端配置"></a>Telnet服务器端配置</h5><h6 id="启动AAA服务"><a href="#启动AAA服务" class="headerlink" title="启动AAA服务"></a>启动AAA服务</h6><p><TelnetServer><code>sys</code></p>
+<h5 id="Telnet服务器端配置"><a href="#Telnet服务器端配置" class="headerlink" title="Telnet服务器端配置"></a>Telnet服务器端配置</h5><h6 id="启动AAA服务"><a href="#启动AAA服务" class="headerlink" title="启动AAA服务"></a>启动AAA服务</h6><p><code>&lt;TelnetServer&gt;sys</code></p>
 <p>[TelnetServer]<code>aaa</code></p>
 <h6 id="在AAA服务器上创建本地登录账号"><a href="#在AAA服务器上创建本地登录账号" class="headerlink" title="在AAA服务器上创建本地登录账号"></a>在AAA服务器上创建本地登录账号</h6><p>账号为lxy ，密码为123321 权限级别为3级</p>
 <p>[TelnetServer-aaa]<code>local-user lxy password cipher 123321 privilege level 3</code></p>
@@ -129,7 +131,7 @@
 <p>[TelnetServer-ui-vty0]<code>authentication-mode aaa</code></p>
 <h5 id="保存退出-1"><a href="#保存退出-1" class="headerlink" title="保存退出"></a>保存退出</h5><p>[TelnetServer-ui-vty0]<code>q</code></p>
 <h5 id="Telnet客户端验证"><a href="#Telnet客户端验证" class="headerlink" title="Telnet客户端验证"></a>Telnet客户端验证</h5><p>在简单配置基础基础之上，使用管员级别的账户来远程配置路由。</p>
-<p><Huawei><code>telnet 192.168.1.254</code><br>  Press CTRL_] to quit telnet mode<br>  Trying 192.168.1.254 …<br>  Connected to 192.168.1.254 …</p>
+<p><code>&lt;Huawei&gt;telnet 192.168.1.254</code><br>  Press CTRL_] to quit telnet mode<br>  Trying 192.168.1.254 …<br>  Connected to 192.168.1.254 …</p>
 <p>Login authentication</p>
 <p>Username:<code>lxy</code><br>Password:<br><TelnetServer></p>
 <h3 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h3><h4 id="umooc-gdgm-cn"><a href="#umooc-gdgm-cn" class="headerlink" title="umooc.gdgm.cn"></a>umooc.gdgm.cn</h4><p>华为设备项目实践-<a target="_blank" rel="noopener" href="https://umooc.gdgm.cn/meol/jpk/course/layout/newpage/index.jsp?courseId=12182">0201C-21010-抓取telnet明文密码</a></p>
@@ -138,7 +140,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xinyuu.socomic.net/2023/03/01/eNSP%E4%BD%BF%E7%94%A8Telnet%E7%99%BB%E5%BD%95%E5%8D%8E%E4%B8%BA%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87/" data-id="clepc46tt00027osxgef5ga9y" data-title="eNSP使用Telnet登录华为网络设备" class="article-share-link">Teilen</a>
+      <a data-url="https://xinyuu.socomic.net/2023/03/01/eNSP%E4%BD%BF%E7%94%A8Telnet%E7%99%BB%E5%BD%95%E5%8D%8E%E4%B8%BA%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87/" data-id="clepcf4oa0004jwsx7lea976s" data-title="eNSP使用Telnet登录华为网络设备" class="article-share-link">Share</a>
       
       
       
@@ -152,7 +154,7 @@
   
   
     <a href="/2023/02/28/eNSP%E4%BD%BF%E7%94%A8Web%E7%99%BB%E5%BD%95%E5%8D%8E%E4%B8%BA%E9%98%B2%E7%81%AB%E5%A2%99/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Älter</strong>
+      <strong class="article-nav-caption">Older</strong>
       <div class="article-nav-title">eNSP使用Web登录华为USG6000V防火墙控制台</div>
     </a>
   
@@ -190,7 +192,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archiv</h3>
+    <h3 class="widget-title">Archives</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">三月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">二月 2023</a></li></ul>
     </div>
@@ -200,7 +202,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">letzter Beitrag</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
         
