@@ -157,7 +157,10 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h4 id="在这之前"><a href="#在这之前" class="headerlink" title="在这之前"></a>在这之前</h4><p><strong>hybrid是华为网络设备专有接口。</strong>同时兼有Access接口和Trunk接口的功能，这里重点介绍hybrid。</p>
+        <p><em><strong>这是一个尚未完成编辑的文档！</strong></em></p>
+<p>这个文档尚未完成编辑，部分文字描述不够全面！</p>
+<p>谨供参考！</p>
+<h4 id="在这之前"><a href="#在这之前" class="headerlink" title="在这之前"></a>在这之前</h4><p><strong>hybrid是华为网络设备专有接口。</strong>同时兼有Access接口和Trunk接口的功能，这里重点介绍hybrid。</p>
 <p>要了解hybrid如何工作，详见<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_47153988/article/details/106474693">华为Hybrid接口详解（原理+配置）_hybrid端口配置及解释_长恋离亭的博客-CSDN博客</a></p>
 <h4 id="拓扑图"><a href="#拓扑图" class="headerlink" title="拓扑图"></a>拓扑图</h4><p><img src="https://img1.socomic.net/static/Snipaste_2023-03-02_23-28-37.png"></p>
 <h5 id="配置说明"><a href="#配置说明" class="headerlink" title="配置说明"></a>配置说明</h5><p>PC4与PC5属于同一VLAN，PC2与PC9属于同一vlan。PC1的vlan10 与所有机器互通，vlan 20 与vlan 30 的机器不互通</p>
@@ -168,27 +171,30 @@
 
 
 
-<h5 id="端口的配置"><a href="#端口的配置" class="headerlink" title="端口的配置"></a>端口的配置</h5><h6 id="hybrid链路"><a href="#hybrid链路" class="headerlink" title="hybrid链路"></a>hybrid链路</h6><p>hybrid链路是网络设备与终端之间的通讯链路。</p>
-<p>配置端口 </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[Huawei]interface Ethernet 0/0/3</span><br><span class="line">[Huawei-Ethernet0/0/3]port hybrid pvid vlan 10 //把端口加入到 vlan 10</span><br><span class="line">[Huawei-Ethernet0/0/3]port hybrid untagged vlan all</span><br></pre></td></tr></table></figure>
+<h3 id="端口的配置"><a href="#端口的配置" class="headerlink" title="端口的配置"></a>端口的配置</h3><h5 id="hybrid"><a href="#hybrid" class="headerlink" title="hybrid"></a>hybrid</h5><h6 id="hybrid链路的工作原理"><a href="#hybrid链路的工作原理" class="headerlink" title="hybrid链路的工作原理"></a>hybrid链路的工作原理</h6><p>hybrid链路是网络设备与终端之间的通讯链路。</p>
+<p>untag列表<br>交换机接口可设置untag列表，当数据从接口出去时，会查看untag表，若表中存在对应标签，则会脱掉标签，放通数据。若表中没有对应标签，则会查看tag表。若存在对应标签，则会放通，若不存在，则丢弃数据。</p>
+<p>tag列表<br>交换机接口可设置tag列表，当数据进入接口是，会查看数据有无标签，若没有标签，则会打上PVID标签，放通，若有标签，会查看tag表是否存在对应标签，若存在，则放通，若不存在则丢弃。</p>
+<p>PVID<br>交换机接口可设置PVID，数据进入接口时，会查看数据是否有标签，若没有标签，则会打上PVID标签，放通，若有标签，则会查看tag表。</p>
+<h6 id="配置端口"><a href="#配置端口" class="headerlink" title="配置端口"></a>配置端口</h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[Huawei]interface Ethernet 0/0/3</span><br><span class="line">[Huawei-Ethernet0/0/3]port hybrid pvid vlan 10 //把端口加入到 vlan 10</span><br><span class="line">[Huawei-Ethernet0/0/3]port hybrid untagged vlan all</span><br></pre></td></tr></table></figure>
 
 <p>这里有一个参数需要注意 ：<code>untagged</code></p>
-<p><code>untagged</code>的功能就是把数据帧中的tag标签去除，让数据包从这个端口流出</p>
+<p><code>untagged</code>的工作模式：</p>
+<p><code>untagged</code>的功能就是把指定数据的tag标签去除，让数据包从这个端口流出</p>
 <p><code>untagged</code> 参数后面跟着  <code>vlan all</code> 就是允许所有 vlan 从这个端口流出。</p>
-<p>同理，如果要指定剥离某个带VLAN标签的数据帧从该口流出只需要在<code>untagged</code> 参数后面跟着VLAN 编号就行。比如：</p>
+<p>同理，如果要指定某个带标签的数据剥离标签并从该口流出，只需要在<code>untagged</code> 参数后面跟着VLAN 编号就行。比如：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">port hybrid untagged vlan 10 //剥离tag pvid 为 10 的 数据包，并从该口流出</span><br><span class="line">port hybrid untagged vlan 10 20 //剥离tag pvid 为 10和20 的 数据包，并从该口流出</span><br></pre></td></tr></table></figure>
 
 <p>这样我们就配置好一个接口了。</p>
 <p>根据描述，我们可以按照上面的方式配置其它端口。</p>
-<h6 id="trunk链路"><a href="#trunk链路" class="headerlink" title="trunk链路"></a>trunk链路</h6><p>trunk链路是网络设备间的通讯链路。</p>
+<h5 id="trunk链路"><a href="#trunk链路" class="headerlink" title="trunk链路"></a>trunk链路</h5><p>trunk链路是网络设备间的通讯链路。</p>
 <p>在上面的拓扑图中，两个交换机的配置相同。<strong>GigabitEthernet0&#x2F;0&#x2F;1</strong>是两个网络设备间的物理连接口。所以我们进入到这个端口进行配置。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[Huawei]int g 0/0/1</span><br><span class="line">[Huawei-GigabitEthernet0/0/1]port link-type trunk //华为交换机默认走hybrid协议，这条命令将端口改为通用的trunk协议。</span><br><span class="line">[Huawei-GigabitEthernet0/0/1]port trunk allow-pass vlan all//允许所有vlan通过</span><br></pre></td></tr></table></figure>
 
 <p>配置完成后，我们输入<code>display this</code> 查看一下目前端口的配置状况：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[Huawei-GigabitEthernet0/0/1]display this </span><br><span class="line">#</span><br><span class="line">interface GigabitEthernet0/0/1</span><br><span class="line"> port link-type trunk</span><br><span class="line"> port trunk allow-pass vlan 2 to 4094</span><br><span class="line">#</span><br><span class="line">return</span><br><span class="line">[Huawei-GigabitEthernet0/0/1]</span><br></pre></td></tr></table></figure>
 
-<p>done！</p>
-<h6 id="access链路"><a href="#access链路" class="headerlink" title="access链路"></a>access链路</h6><p>这里简单了解一下access链路在端口的配置</p>
+<p><strong>done！</strong></p>
+<h5 id="access链路"><a href="#access链路" class="headerlink" title="access链路"></a>access链路</h5><p>这里简单了解一下access链路在端口的配置</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">port link-type access </span><br><span class="line">port port default vlan [ID]</span><br></pre></td></tr></table></figure>
 
 
