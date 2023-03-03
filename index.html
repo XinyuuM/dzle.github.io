@@ -61,12 +61,12 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Buscar"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Buscar"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://xinyuu.socomic.net"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Suche"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://xinyuu.socomic.net"></form>
       </div>
     </div>
   </div>
@@ -74,6 +74,148 @@
 
       <div class="outer">
         <section id="main">
+  
+    <article id="post-eNSP使用SSH登录防火墙" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/03/03/eNSP%E4%BD%BF%E7%94%A8SSH%E7%99%BB%E5%BD%95%E9%98%B2%E7%81%AB%E5%A2%99/" class="article-date">
+  <time class="dt-published" datetime="2023-03-03T01:11:15.000Z" itemprop="datePublished">2023-03-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/03/03/eNSP%E4%BD%BF%E7%94%A8SSH%E7%99%BB%E5%BD%95%E9%98%B2%E7%81%AB%E5%A2%99/">eNSP使用SSH登录防火墙</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>SSH登录与Telnet的配置基本相同，这里不多做赘述，</p>
+<p>只列出Telnet没有或不同的代码块，具体方法请参考Telnet配置</p>
+<p>需要在接口配置SSH服务</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">int g1/0/0</span><br><span class="line">ip add 192.168.1.1 24</span><br><span class="line">#开启连接</span><br><span class="line">undo shutdown </span><br><span class="line">#Info: Interface GigabitEthernet0/0/0 is not shutdown.</span><br><span class="line">#允许ssh访问</span><br><span class="line">service-manage enable           </span><br><span class="line">#打开接口的ssh管理</span><br><span class="line">service-manage ssh permit</span><br><span class="line">quit</span><br></pre></td></tr></table></figure>
+
+<p>需要创建密钥对</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">rsa local-key-pair create</span><br><span class="line"></span><br><span class="line">The key name will be: USG6000V1_Host</span><br><span class="line">The range of public key size is (512 ~ 2048). </span><br><span class="line">NOTES: If the key modulus is greater than 512, </span><br><span class="line">       it will take a few minutes.</span><br><span class="line">输入默认的密钥长度，默认值为2048             </span><br><span class="line">Input the bits in the modulus[default = 2048]:</span><br><span class="line">Generating keys...</span><br><span class="line">.+++++</span><br><span class="line">........................++</span><br><span class="line">....++++</span><br><span class="line">...........++</span><br></pre></td></tr></table></figure>
+
+<p>需要指定验证方式</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">user-interface vty 0 4</span><br><span class="line">authentication-mode aaa             </span><br><span class="line">protocol inbound ssh</span><br><span class="line">quit</span><br></pre></td></tr></table></figure>
+
+<p>需要指定SSH用户</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssh user liuxinyu  </span><br><span class="line">ssh user liuxinyu authentication-type password</span><br></pre></td></tr></table></figure>
+
+<p>需要配置服务类型</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">aaa</span><br><span class="line">#创建本地用户test，用自己的汉语拼音全名替换test。</span><br><span class="line">manager-user test</span><br><span class="line">password cipher test@123</span><br><span class="line">#Info: You are advised to config on man-machine mode.</span><br><span class="line">service-type ssh</span><br><span class="line">level 3</span><br><span class="line">quit</span><br><span class="line">quit</span><br></pre></td></tr></table></figure>
+
+<p>需要开启SSH服务</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stelnet server enable</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://xinyuu.socomic.net/2023/03/03/eNSP%E4%BD%BF%E7%94%A8SSH%E7%99%BB%E5%BD%95%E9%98%B2%E7%81%AB%E5%A2%99/" data-id="cles910ro000038sx8ddx5qs7" data-title="eNSP使用SSH登录防火墙" class="article-share-link">Teilen</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eNSP/" rel="tag">eNSP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8D%8E%E4%B8%BA%E9%98%B2%E7%81%AB%E5%A2%99/" rel="tag">华为防火墙</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-eNSP交换机VLAN配置" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/03/02/eNSP%E4%BA%A4%E6%8D%A2%E6%9C%BAVLAN%E9%85%8D%E7%BD%AE/" class="article-date">
+  <time class="dt-published" datetime="2023-03-02T14:00:24.000Z" itemprop="datePublished">2023-03-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/03/02/eNSP%E4%BA%A4%E6%8D%A2%E6%9C%BAVLAN%E9%85%8D%E7%BD%AE/">eNSP交换机VLAN配置</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h4 id="在这之前"><a href="#在这之前" class="headerlink" title="在这之前"></a>在这之前</h4><p><strong>hybrid是华为网络设备专有接口。</strong>同时兼有Access接口和Trunk接口的功能，这里重点介绍hybrid。</p>
+<p>要了解hybrid如何工作，详见<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_47153988/article/details/106474693">华为Hybrid接口详解（原理+配置）_hybrid端口配置及解释_长恋离亭的博客-CSDN博客</a></p>
+<h4 id="拓扑图"><a href="#拓扑图" class="headerlink" title="拓扑图"></a>拓扑图</h4><p><img src="https://img1.socomic.net/static/Snipaste_2023-03-02_23-28-37.png"></p>
+<h5 id="配置说明"><a href="#配置说明" class="headerlink" title="配置说明"></a>配置说明</h5><p>PC4与PC5属于同一VLAN，PC2与PC9属于同一vlan。PC1的vlan10 与所有机器互通，vlan 20 与vlan 30 的机器不互通</p>
+<h4 id="交换机的配置"><a href="#交换机的配置" class="headerlink" title="交换机的配置"></a>交换机的配置</h4><h5 id="创建VLAN"><a href="#创建VLAN" class="headerlink" title="创建VLAN"></a>创建VLAN</h5><p>在华为交换机中，创建vlan有以下几种方式：</p>
+<p>创建单个vlan   <code>vlan 10</code> &#x2F;&#x2F; 创建编号为 10 的VLAN（不常用）<br>批量创建VLAN   <code>vlan batch 10 20 </code> &#x2F;&#x2F;创建编号为10 和 20 的VLAN<br>或者  <code>vlan batch 50 to 55</code> &#x2F;&#x2F;创建编号50到55的VLAN</p>
+<p>我们需要给两台交换机都创建三个VLAN：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[Huawei]vlan batch 10 20 30</span><br><span class="line">Info: This operation may take a few seconds. Please wait for a moment...done.</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="端口的配置"><a href="#端口的配置" class="headerlink" title="端口的配置"></a>端口的配置</h5><h6 id="hybrid链路"><a href="#hybrid链路" class="headerlink" title="hybrid链路"></a>hybrid链路</h6><p>hybrid链路是网络设备与终端之间的通讯链路。</p>
+<p>配置端口 </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[Huawei]interface Ethernet 0/0/3</span><br><span class="line">[Huawei-Ethernet0/0/3]port hybrid pvid vlan 10 //把端口加入到 vlan 10</span><br><span class="line">[Huawei-Ethernet0/0/3]port hybrid untagged vlan all</span><br></pre></td></tr></table></figure>
+
+<p>这里有一个参数需要注意 ：<code>untagged</code></p>
+<p><code>untagged</code>的功能就是把数据帧中的tag标签去除，让数据包从这个端口流出</p>
+<p><code>untagged</code> 参数后面跟着  <code>vlan all</code> 就是允许所有 vlan 从这个端口流出。</p>
+<p>同理，如果要指定剥离某个带VLAN标签的数据帧从该口流出只需要在<code>untagged</code> 参数后面跟着VLAN 编号就行。比如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">port hybrid untagged vlan 10 //剥离tag pvid 为 10 的 数据包，并从该口流出</span><br><span class="line">port hybrid untagged vlan 10 20 //剥离tag pvid 为 10和20 的 数据包，并从该口流出</span><br></pre></td></tr></table></figure>
+
+<p>这样我们就配置好一个接口了。</p>
+<p>根据描述，我们可以按照上面的方式配置其它端口。</p>
+<h6 id="trunk链路"><a href="#trunk链路" class="headerlink" title="trunk链路"></a>trunk链路</h6><p>trunk链路是网络设备间的通讯链路。</p>
+<p>在上面的拓扑图中，两个交换机的配置相同。<strong>GigabitEthernet0&#x2F;0&#x2F;1</strong>是两个网络设备间的物理连接口。所以我们进入到这个端口进行配置。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[Huawei]int g 0/0/1</span><br><span class="line">[Huawei-GigabitEthernet0/0/1]port link-type trunk //华为交换机默认走hybrid协议，这条命令将端口改为通用的trunk协议。</span><br><span class="line">[Huawei-GigabitEthernet0/0/1]port trunk allow-pass vlan all//允许所有vlan通过</span><br></pre></td></tr></table></figure>
+
+<p>配置完成后，我们输入<code>display this</code> 查看一下目前端口的配置状况：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[Huawei-GigabitEthernet0/0/1]display this </span><br><span class="line">#</span><br><span class="line">interface GigabitEthernet0/0/1</span><br><span class="line"> port link-type trunk</span><br><span class="line"> port trunk allow-pass vlan 2 to 4094</span><br><span class="line">#</span><br><span class="line">return</span><br><span class="line">[Huawei-GigabitEthernet0/0/1]</span><br></pre></td></tr></table></figure>
+
+<p>done！</p>
+<h6 id="access链路"><a href="#access链路" class="headerlink" title="access链路"></a>access链路</h6><p>这里简单了解一下access链路在端口的配置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">port link-type access </span><br><span class="line">port port default vlan [ID]</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="查看两台交换机的接口配置"><a href="#查看两台交换机的接口配置" class="headerlink" title="查看两台交换机的接口配置"></a>查看两台交换机的接口配置</h4><p>SW1</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&lt;Huawei&gt;display port vlan </span><br><span class="line">Port                    Link Type    PVID  Trunk VLAN List</span><br><span class="line">-------------------------------------------------------------------------------</span><br><span class="line">Ethernet0/0/1           hybrid       30    -                                   </span><br><span class="line">Ethernet0/0/2           hybrid       20    -                                   </span><br><span class="line">Ethernet0/0/3           hybrid       10    -                                   </span><br><span class="line">Ethernet0/0/4           hybrid       1     -                                   </span><br><span class="line">Ethernet0/0/5           hybrid       1     -                                   </span><br><span class="line">Ethernet0/0/6           hybrid       1     -                                   </span><br><span class="line">Ethernet0/0/7           hybrid       1     -                                   </span><br><span class="line">Ethernet0/0/8           hybrid       1     -                                   </span><br><span class="line">Ethernet0/0/9           hybrid       1     -                                   </span><br><span class="line">Ethernet0/0/10          hybrid       1     -                                   </span><br><span class="line">Ethernet0/0/11          hybrid       1     -                                   </span><br><span class="line">Ethernet0/0/12          hybrid       1     -                                   </span><br><span class="line">Ethernet0/0/13          hybrid       1     -                                   </span><br><span class="line">Ethernet0/0/14          hybrid       1     -                                   </span><br><span class="line">Ethernet0/0/15          hybrid       1     -                                   </span><br><span class="line">Ethernet0/0/16          hybrid       1     -                                   </span><br><span class="line">Ethernet0/0/17          hybrid       1     -                                   </span><br><span class="line">Ethernet0/0/18          hybrid       1     -                                   </span><br><span class="line">Ethernet0/0/19          hybrid       1     -                                   </span><br><span class="line">Ethernet0/0/20          hybrid       1     -                                   </span><br><span class="line">Ethernet0/0/21          hybrid       1     -                                   </span><br><span class="line">Ethernet0/0/22          hybrid       1     -                                   </span><br><span class="line">GigabitEthernet0/0/1    trunk        1     1-4094</span><br><span class="line">GigabitEthernet0/0/2    hybrid       1     -                                   </span><br><span class="line">&lt;Huawei&gt;</span><br></pre></td></tr></table></figure>
+
+<p>SW2</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&lt;Huawei&gt;display port vlan </span><br><span class="line">Port                    Link Type    PVID  Trunk VLAN List</span><br><span class="line">-------------------------------------------------------------------------------</span><br><span class="line">Ethernet0/0/1           hybrid       20    -                                   </span><br><span class="line">Ethernet0/0/2           hybrid       1     -                                   </span><br><span class="line">Ethernet0/0/3           hybrid       30    -                                   </span><br><span class="line">Ethernet0/0/4           hybrid       1     -                                   </span><br><span class="line">Ethernet0/0/5           hybrid       1     -                                   </span><br><span class="line">Ethernet0/0/6           hybrid       1     -                                   </span><br><span class="line">Ethernet0/0/7           hybrid       1     -                                   </span><br><span class="line">Ethernet0/0/8           hybrid       1     -                                   </span><br><span class="line">Ethernet0/0/9           hybrid       1     -                                   </span><br><span class="line">Ethernet0/0/10          hybrid       1     -                                   </span><br><span class="line">Ethernet0/0/11          hybrid       1     -                                   </span><br><span class="line">Ethernet0/0/12          hybrid       1     -                                   </span><br><span class="line">Ethernet0/0/13          hybrid       1     -                                   </span><br><span class="line">Ethernet0/0/14          hybrid       1     -                                   </span><br><span class="line">Ethernet0/0/15          hybrid       1     -                                   </span><br><span class="line">Ethernet0/0/16          hybrid       1     -                                   </span><br><span class="line">Ethernet0/0/17          hybrid       1     -                                   </span><br><span class="line">Ethernet0/0/18          hybrid       1     -                                   </span><br><span class="line">Ethernet0/0/19          hybrid       1     -                                   </span><br><span class="line">Ethernet0/0/20          hybrid       1     -                                   </span><br><span class="line">Ethernet0/0/21          hybrid       1     -                                   </span><br><span class="line">Ethernet0/0/22          hybrid       1     -                                   </span><br><span class="line">GigabitEthernet0/0/1    trunk        1     1-4094</span><br><span class="line">GigabitEthernet0/0/2    hybrid       1     -                                   </span><br><span class="line">&lt;Huawei&gt;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://xinyuu.socomic.net/2023/03/02/eNSP%E4%BA%A4%E6%8D%A2%E6%9C%BAVLAN%E9%85%8D%E7%BD%AE/" data-id="cles919l0000338sxe06u2iaj" data-title="eNSP交换机VLAN配置" class="article-share-link">Teilen</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eNSP/" rel="tag">eNSP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8D%8E%E4%B8%BA%E8%AE%BE%E5%A4%87%E9%A1%B9%E7%9B%AE%E5%AE%9E%E8%B7%B5/" rel="tag">华为设备项目实践</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
   
     <article id="post-eNSP使用路由器Telnet连接华为USG6000V防火墙" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
@@ -122,7 +264,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xinyuu.socomic.net/2023/03/01/eNSP%E4%BD%BF%E7%94%A8%E8%B7%AF%E7%94%B1%E5%99%A8Telnet%E8%BF%9E%E6%8E%A5%E5%8D%8E%E4%B8%BAUSG6000V%E9%98%B2%E7%81%AB%E5%A2%99/" data-id="clepsbgqh00053ssx8cj87ipq" data-title="eNSP使用路由器Telnet连接华为USG6000V防火墙" class="article-share-link">Compartir</a>
+      <a data-url="https://xinyuu.socomic.net/2023/03/01/eNSP%E4%BD%BF%E7%94%A8%E8%B7%AF%E7%94%B1%E5%99%A8Telnet%E8%BF%9E%E6%8E%A5%E5%8D%8E%E4%B8%BAUSG6000V%E9%98%B2%E7%81%AB%E5%A2%99/" data-id="clepsbgqh00053ssx8cj87ipq" data-title="eNSP使用路由器Telnet连接华为USG6000V防火墙" class="article-share-link">Teilen</a>
       
       
       
@@ -195,7 +337,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xinyuu.socomic.net/2023/03/01/eNSP%E4%BD%BF%E7%94%A8Telnet%E7%99%BB%E5%BD%95%E5%8D%8E%E4%B8%BA%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87/" data-id="clepsbgqd00023ssx9wl9aqeb" data-title="eNSP使用Telnet登录华为网络设备" class="article-share-link">Compartir</a>
+      <a data-url="https://xinyuu.socomic.net/2023/03/01/eNSP%E4%BD%BF%E7%94%A8Telnet%E7%99%BB%E5%BD%95%E5%8D%8E%E4%B8%BA%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87/" data-id="clepsbgqd00023ssx9wl9aqeb" data-title="eNSP使用Telnet登录华为网络设备" class="article-share-link">Teilen</a>
       
       
       
@@ -250,7 +392,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xinyuu.socomic.net/2023/02/28/eNSP%E4%BD%BF%E7%94%A8Web%E7%99%BB%E5%BD%95%E5%8D%8E%E4%B8%BA%E9%98%B2%E7%81%AB%E5%A2%99/" data-id="clepsbgqg00043ssx5gfkd7rp" data-title="eNSP使用Web登录华为USG6000V防火墙控制台" class="article-share-link">Compartir</a>
+      <a data-url="https://xinyuu.socomic.net/2023/02/28/eNSP%E4%BD%BF%E7%94%A8Web%E7%99%BB%E5%BD%95%E5%8D%8E%E4%B8%BA%E9%98%B2%E7%81%AB%E5%A2%99/" data-id="clepsbgqg00043ssx5gfkd7rp" data-title="eNSP使用Web登录华为USG6000V防火墙控制台" class="article-share-link">Teilen</a>
       
       
       
@@ -323,7 +465,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xinyuu.socomic.net/2023/02/25/PHP-MYSQL%E5%AE%9E%E7%8E%B0%E7%BF%BB%E9%A1%B5%E5%8A%9F%E8%83%BD/" data-id="clepsbgq900013ssx8ykx2o7g" data-title="PHP+MYSQL实现翻页功能" class="article-share-link">Compartir</a>
+      <a data-url="https://xinyuu.socomic.net/2023/02/25/PHP-MYSQL%E5%AE%9E%E7%8E%B0%E7%BF%BB%E9%A1%B5%E5%8A%9F%E8%83%BD/" data-id="clepsbgq900013ssx8ykx2o7g" data-title="PHP+MYSQL实现翻页功能" class="article-share-link">Teilen</a>
       
       
       
@@ -376,7 +518,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xinyuu.socomic.net/2023/02/22/hello-world/" data-id="clepsbgqn000j3ssx2uvxhb76" data-title="Hello World" class="article-share-link">Compartir</a>
+      <a data-url="https://xinyuu.socomic.net/2023/02/22/hello-world/" data-id="clepsbgqn000j3ssx2uvxhb76" data-title="Hello World" class="article-share-link">Teilen</a>
       
       
       
@@ -409,16 +551,16 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Nube de Tags</h3>
+    <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/PHP/" style="font-size: 10px;">PHP</a> <a href="/tags/eNSP/" style="font-size: 20px;">eNSP</a> <a href="/tags/%E5%8D%8E%E4%B8%BA%E8%AE%BE%E5%A4%87%E9%A1%B9%E7%9B%AE%E5%AE%9E%E8%B7%B5/" style="font-size: 10px;">华为设备项目实践</a> <a href="/tags/%E5%8D%8E%E4%B8%BA%E9%98%B2%E7%81%AB%E5%A2%99/" style="font-size: 15px;">华为防火墙</a>
+      <a href="/tags/PHP/" style="font-size: 10px;">PHP</a> <a href="/tags/eNSP/" style="font-size: 20px;">eNSP</a> <a href="/tags/%E5%8D%8E%E4%B8%BA%E8%AE%BE%E5%A4%87%E9%A1%B9%E7%9B%AE%E5%AE%9E%E8%B7%B5/" style="font-size: 13.33px;">华为设备项目实践</a> <a href="/tags/%E5%8D%8E%E4%B8%BA%E9%98%B2%E7%81%AB%E5%A2%99/" style="font-size: 16.67px;">华为防火墙</a>
     </div>
   </div>
 
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archivos</h3>
+    <h3 class="widget-title">Archiv</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">三月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">二月 2023</a></li></ul>
     </div>
@@ -428,9 +570,17 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Posts recientes</h3>
+    <h3 class="widget-title">letzter Beitrag</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2023/03/03/eNSP%E4%BD%BF%E7%94%A8SSH%E7%99%BB%E5%BD%95%E9%98%B2%E7%81%AB%E5%A2%99/">eNSP使用SSH登录防火墙</a>
+          </li>
+        
+          <li>
+            <a href="/2023/03/02/eNSP%E4%BA%A4%E6%8D%A2%E6%9C%BAVLAN%E9%85%8D%E7%BD%AE/">eNSP交换机VLAN配置</a>
+          </li>
         
           <li>
             <a href="/2023/03/01/eNSP%E4%BD%BF%E7%94%A8%E8%B7%AF%E7%94%B1%E5%99%A8Telnet%E8%BF%9E%E6%8E%A5%E5%8D%8E%E4%B8%BAUSG6000V%E9%98%B2%E7%81%AB%E5%A2%99/">eNSP使用路由器Telnet连接华为USG6000V防火墙</a>
@@ -442,14 +592,6 @@
         
           <li>
             <a href="/2023/02/28/eNSP%E4%BD%BF%E7%94%A8Web%E7%99%BB%E5%BD%95%E5%8D%8E%E4%B8%BA%E9%98%B2%E7%81%AB%E5%A2%99/">eNSP使用Web登录华为USG6000V防火墙控制台</a>
-          </li>
-        
-          <li>
-            <a href="/2023/02/25/PHP-MYSQL%E5%AE%9E%E7%8E%B0%E7%BF%BB%E9%A1%B5%E5%8A%9F%E8%83%BD/">PHP+MYSQL实现翻页功能</a>
-          </li>
-        
-          <li>
-            <a href="/2023/02/22/hello-world/">Hello World</a>
           </li>
         
       </ul>
@@ -466,7 +608,7 @@
     <div id="footer-info" class="inner">
       
       &copy; 2023 Xinyuu<br>
-      Construido por <a href="https://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
